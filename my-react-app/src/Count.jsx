@@ -39,7 +39,11 @@ function Count(props) {
     }
     //tarts();
   }
-  
+  function changeInput(event){
+    const { value, name } = event.target;
+
+        setCount(value);
+  }
   
   
   return (
@@ -48,6 +52,7 @@ function Count(props) {
     <button  onClick={()=>{
         decrease();
         props.toDecrease(props.count);}}>-</button>
+        
     <button onClick={
       ()=>{
       increase();

@@ -2,23 +2,12 @@ import { useState } from 'react'
 
 function Total(props) {
  
-
-  var [total, setTotal] = useState(0);
-
-  function tarts(){
-    setTotal(prevTotal=>{
-      console.log(total)
-      return prevTotal+(props.total);
-    })
-  }
- 
-  
   
   
   return (
     <div className="container">
-    {tarts}
-    <h3>{total}</h3>
+    <h3>Total: {props.count}</h3>
+    <a href='/src/form.html'>Form</a>
   </div>
   )
   

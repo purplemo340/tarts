@@ -5,12 +5,12 @@ import Tarts from './Tarts.jsx'
 import App from './App.jsx'
 import './index.css'
 import { loadStripe } from '@stripe/stripe-js'
-
+import App1 from './Cart.jsx'
 
 createRoot(document.getElementById('root')).render(
   <div>
     <h1 className='title'>Tarts</h1>
-    <App />
+    <App1/>
     
   </div>
 )

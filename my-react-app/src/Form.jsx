@@ -1,27 +1,26 @@
 import { useState } from 'react'
 
-function Total(props) {
+function Form(props) {
  
 
-  var [total, setTotal] = useState(0);
-
-  function tarts(){
-    setTotal(prevTotal=>{
-      console.log(total)
-      return prevTotal+(props.total);
-    })
-  }
- 
-  
-  
   
   return (
     <div className="container">
-    {tarts}
-    <h3>{total}</h3>
+    
+    <h3>{props.count}</h3>
+    <form>
+      <label>Name</label>
+      <input></input>
+      <br/>
+      <label>Delivery Date</label>
+      <input></input>
+      <br/>
+      <label>Address</label>
+      <input></input>
+    </form>
   </div>
   )
   
 }
 
-export default Total;
+export default Form;
