@@ -96,7 +96,7 @@ app.post('/create-checkout-session', async (req, res) => {
     success_url: 'http://localhost:4242/success',
     cancel_url: 'http://localhost:4242/cancel',
   });
-
+  console.log(req.body)
   res.redirect(303, session.url);
 });
 

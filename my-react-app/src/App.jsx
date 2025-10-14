@@ -1,56 +1,51 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import Tarts from './Tarts'
-import Total from './Total'
+import { useState, useContext, createContext } from 'react'
 import CheckoutForm from './CheckoutForm'
 import App1 from './Cart'
-
+import Tart from './Tart'
+import Pay from './Pay'
+//items sold and pricing
 const tarts=[
 
   {
     flavor:"Guava",
-    price:16
+    price:16, 
+    img: "chocolate_tart.jpg"
   },
   {
     flavor:"Coconut",
-    price:17
+    price:17, 
+    img: "chocolate_tart.jpg"
   },
   {
     flavor:"Pineapple",
-    price:16
+    price:16, 
+    img: "chocolate_tart.jpg"
   }
 ]
 
-function setTart(tart){
-
-}
 
 function App() {
-  var [tartCount, setTartCount] = useState(0);
- function overall(cnt){
-  setTartCount(prevCount=>{
-    return cnt;
-  })
-  
- }
+  const [count, setCount] = useState(0);
+ 
+var [itemTotal, setItemTotal] = useState(0);
+var [overallTotal, setOverallTotal] = useState(0);
+  //individual item/tart count
 
- //////////////////////
- var [total, setTotal] = useState(0);
+
 
  function increase(){
 
-    setTartCount(tartCount+1);
+    setItemTotal(itemTotal+1);
   
  
 }
 function decrease(){
     
     
-  if(tartCount==0){
-    setTartCount(0)
+  if(itemTotal==0){
+    setItemTotal(0)
   } else{
-  setTartCount(tartCount-1)
+  setItemTotal(itemTotal-1)
   
   }
 
@@ -60,21 +55,18 @@ function decrease(){
   return (
    
     <div>
-      {tarts.map((tart, index) =>
-      <Tarts 
+      <h2>{itemTotal}</h2>
+     {tarts.map((tart, index)=>
+      <Tart
       name= {tart.flavor}
-      img="chocolate_tart.jpg"
       price={tart.price}
-      toCount={overall}
+      count={itemTotal}
+      img={tart.img}
       toIncrease={increase}
       toDecrease={decrease}
-      count={tartCount}
-      key={index}
-    
-    />
-  )}
-    <Total count={tartCount}/>
-    
+      key={index} />
+     )}
+    <Pay />
     <App1 />
     </div>
    
