@@ -1,13 +1,15 @@
 
-import { useState } from "react";
-
+import { useState, useEffect } from "react";
 
 
 
 function Tart(props) {
+  useEffect(()=>{
+  cartPaypal.AddToCart({ id: props.hostId})
+}, []);
+
   var [total, setTotal] = useState(0);
   function increaseItem(){
-
     setTotal(total+1);
     props.toIncrease();
  
@@ -40,7 +42,8 @@ function decreaseItem(){
             increaseItem
           }>+</button>
         <h3>{total}</h3>
-       
+        
+        <paypal-add-to-cart-button data-id={props.hostId}></paypal-add-to-cart-button>
     </div>
   );
 }

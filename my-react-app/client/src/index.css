@@ -55,3 +55,30 @@ button:hover {
 img{
   width:200px
 }
+.cart{
+  width: 40%;
+  position: relative;
+}
+.header{
+  border-bottom: solid;
+  
+}
+.menu{
+  display: flex;
+}
+.menu-items{
+  width: 40%;
+}
+.tarts{
+  margin: 10px;
+}
+.container{
+  display: inline;
+}
+.tart{
+  width: 30%;
+}
+.form{
+  display: block;
+  width: 100%;
+}
