@@ -47,8 +47,9 @@ const createOrder = async (cart) => {
         {
           amount: {
             currencyCode: "USD",
-            value: "100.00",
+            value: cart[0].id,
           },
+          quantity:'1'
         },
       ],
     },
@@ -71,6 +72,7 @@ const createOrder = async (cart) => {
       throw new Error(error.message);
     }
   }
+  
 };
 
 /**
@@ -107,6 +109,7 @@ app.post("/api/orders", async (req, res) => {
     const { cart } = req.body;
     const { jsonResponse, httpStatusCode } = await createOrder(cart);
     res.status(httpStatusCode).json(jsonResponse);
+    console.log(cart);
   } catch (error) {
     console.error("Failed to create order:", error);
     res.status(500).json({ error: "Failed to create order." });

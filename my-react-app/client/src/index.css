@@ -1,20 +1,23 @@
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-
+  --red: #DF2E38;
+  --mint: #DDF7E3;
+  --light-green:#C7E8CA;
+  --green:#5D9C59;
 
   color-scheme: light dark;
   color: black;
-  background-color: #FFF7C2;
+  background-color: var(--mint);
 
 }
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: white;
 
 }
 a:hover {
-  color: #535bf2;
+  color: var(--green);
 }
 
 body {
@@ -35,7 +38,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #4B125C;
+  background-color: var(--red);
   transition: border-color 0.25s;
 }
 button:hover {
@@ -43,12 +46,7 @@ button:hover {
 }
 
 
-.tart{
-  width: 30%;
-  float: left;
-  margin: 10px;
-  padding: 5px;
-}
+
 .title{
   border-bottom: solid;
 }
@@ -57,7 +55,6 @@ img{
 }
 .cart{
   width: 40%;
-  position: relative;
 }
 .header{
   border-bottom: solid;
@@ -69,16 +66,40 @@ img{
 .menu-items{
   width: 40%;
 }
-.tarts{
-  margin: 10px;
-}
 .container{
-  display: inline;
+  display: block;
 }
 .tart{
   width: 30%;
+  display: block;
+  float: left;
 }
 .form{
   display: block;
   width: 100%;
+}
+.selectContainer1{
+  text-align: center;
+  width: 20%;
+  float: center;
+}
+
+.item-header{
+  display: flex;
+  text-align: center;
+  float: center;
+}
+.center{
+  float: center;
+}
+.fifty{
+  width: 50%;
+  float: left;
+}
+.forty{
+  width: 50%;
+  float: right;
+}
+.viewCartButtonContainer{
+  float: right;
 }

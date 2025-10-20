@@ -15,10 +15,10 @@ function Header(){
  <h1>Tarts</h1>
  <div className='menu'>
     <div className='menu-items'>
-        <button><a href='google.com'>Home</a></button>
+        <button><a href='index1.html'>Home</a></button>
     </div>
     <div className='cart'>
-        <button><a href='index1.html'><FontAwesomeIcon icon="fa-solid fa-cart-shopping" /></a></button>
+        <paypal-cart-button data-id="pp-view-cart" ></paypal-cart-button>
         </div>
  
  </div>

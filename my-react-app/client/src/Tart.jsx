@@ -1,32 +1,16 @@
 
 import { useState, useEffect } from "react";
-
-
+import tarts from "./tarts";
+import More from './More';
 
 function Tart(props) {
   useEffect(()=>{
   cartPaypal.AddToCart({ id: props.hostId})
 }, []);
 
-  var [total, setTotal] = useState(0);
-  function increaseItem(){
-    setTotal(total+1);
-    props.toIncrease();
- 
-}
-function decreaseItem(){
-  if(props.count!=0 && total!=0){
-  props.toDecrease();
-  }
-  if(total==0){
-    setTotal(0)
-  } else{
-  setTotal(total-1);
-  }
-
-}
   return (
-    <div className="tart">
+    <div >
+      <div className="hidden tart">
         <h2>{props.name} Tart</h2>
           <img 
             src={props.img} 
@@ -34,16 +18,13 @@ function decreaseItem(){
           />
          
           <h2>Price:${props.price}</h2>
-         <button onClick={
-          decreaseItem
-         }>-</button>
-         <button 
-         onClick={
-            increaseItem
-          }>+</button>
-        <h3>{total}</h3>
+          <a href="tart/0">Link</a>
+</div>
+<div>
+<paypal-add-to-cart-button  data-id={props.hostId}></paypal-add-to-cart-button>
+</div>
+
         
-        <paypal-add-to-cart-button data-id={props.hostId}></paypal-add-to-cart-button>
     </div>
   );
 }
