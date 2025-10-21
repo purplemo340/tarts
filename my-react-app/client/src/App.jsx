@@ -4,6 +4,7 @@ import Tart from './Tart'
 import Pay from './Pay'
 import More from './More'
 import tarts from './tarts.js';
+import Order from './Order.jsx'
 import {
     BrowserRouter as Router,
     Routes,
@@ -62,6 +63,7 @@ const Home = () => {
       
 
      </div>
+     
      </div>
     
     );
@@ -74,6 +76,7 @@ const Home = () => {
       <Router>
         <Routes>
           <Route path="/" element={<Home/>}></Route>
+          <Route path="/test" element= {<Order />}></Route>
          {/*  <Route path="order/:id" element={<Pay />}> </Route>
           <Route path="/tart/:id" element={<More />}></Route> */}
         </Routes>

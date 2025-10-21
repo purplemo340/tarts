@@ -6,7 +6,7 @@ function Message({ content }) {
   return <p>{content}</p>;
 }
 
-function Pay() {
+function Pay(props) {
   const initialOptions = {
     "client-id": import.meta.env.PAYPAL_CLIENT_ID,
     "enable-funding": "venmo",
@@ -16,8 +16,10 @@ function Pay() {
   };
 
   const [message, setMessage] = useState("");
-
+  console.log(props.cart[0].flavor);
   return (
+    <div>
+    <h3>{props.cart[0].flavor}</h3>
     <div className="paypal-button-container">
       <PayPalScriptProvider options={initialOptions}>
         <PayPalButtons
@@ -37,12 +39,7 @@ function Pay() {
                 // use the "body" param to optionally pass additional order information
                 // like product ids and quantities
                 body: JSON.stringify({
-                  cart: [
-                    {
-                      id: "1",
-                      quantity: "1",
-                    },
-                  ],
+                  cart: props.cart
                 }),
               });
 
@@ -116,6 +113,7 @@ function Pay() {
         />
       </PayPalScriptProvider>
       <Message content={message} />
+    </div>
     </div>
   );
 }

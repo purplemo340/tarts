@@ -40,18 +40,11 @@ const ordersController = new OrdersController(client);
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
 const createOrder = async (cart) => {
+  console.log(cart)
   const collect = {
     body: {
       intent: CheckoutPaymentIntent.Capture,
-      purchaseUnits: [
-        {
-          amount: {
-            currencyCode: "USD",
-            value: cart[0].id,
-          },
-          quantity:'1'
-        },
-      ],
+       purchaseUnits: cart,
     },
     prefer: "return=minimal",
   };
