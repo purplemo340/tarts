@@ -44,7 +44,21 @@ const createOrder = async (cart) => {
   const collect = {
     body: {
       intent: CheckoutPaymentIntent.Capture,
-       purchaseUnits: cart,
+       purchaseUnits: [
+      {
+        amount: {
+          currencyCode: 'USD',
+          value: '48',
+          breakdown: {
+            itemTotal: {
+              currencyCode: 'USD',
+              value: '48',
+            },
+          },
+        },
+        items: cart
+      }
+    ]
     },
     prefer: "return=minimal",
   };

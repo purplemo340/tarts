@@ -17,7 +17,7 @@ var [price, setPrice] = useState(0);
                 name: 'Coconut',
                 unitAmount: {
                   currencyCode: 'USD',
-                  value: '16.00',
+                  value: '17.00',
                 },
                 quantity: '0',
                
@@ -41,24 +41,66 @@ var [price, setPrice] = useState(0);
                 
               }
             ] // remove tart from cart if quantity is zero or add as we go
-var [items, setItems]=useState(initialItems);
+var [items, setItems]=useState([]);
   //individual item/tart count
 
 
 
- function increase(index){
+ function increase(index, t){
 
     setOverallTotal(overallTotal+1);
-
+    if(items.length==0){
+      setItems([
+        ...items,
+        {
+                name: t.flavor,
+                unitAmount: {
+                  currencyCode: 'USD',
+                  value: t.price,
+                },
+                quantity: '1',
+                
+              }
+      ])
+      
+        setPrice(price+t.price);
+      console.log(items.length);
+    }
+    
+    else if (!items.some(e=>e.name===t.flavor) ){
+      console.log(typeof(t.flavor))
+      setItems([
+        ...items,
+        {
+                name: t.flavor,
+                unitAmount: {
+                  currencyCode: 'USD',
+                  value: t.price,
+                },
+                quantity: '1',
+                
+              }
+      ])
+      
+        setPrice(price+t.price);
+      console.log(items)
+    }
+    else{
   const nextItems= items.map((item, i) =>{
+    items.sort();
     if( i== index){
+        
         item.quantity=parseInt(item.quantity)+1;
         item.quantity=item.quantity.toString();
         setPrice(price+parseInt(item.unitAmount.value));
         console.log(price);
+        
         return item;
     }
+    
  });
+}
+    
  
 }
 function decrease(){
@@ -81,13 +123,13 @@ function decrease(){
       price={tart.price}
       count={overallTotal}
       img={tart.img}
-      toIncrease={()=>increase(index)}
+      toIncrease={()=>increase(index, tart)}
       toDecrease={decrease}
       hostId={tart.hostId}
       key={index}
         />
         )};
-        <Pay cart={ [
+        <Pay cart={ JSON.stringify([
       {
         amount: {
           currencyCode: 'USD',
@@ -99,9 +141,9 @@ function decrease(){
             },
           },
         },
-        items: items,
+        items:items,
       }
-    ]} 
+    ])} 
         />
     </div>
   );
