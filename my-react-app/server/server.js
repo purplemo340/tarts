@@ -40,29 +40,13 @@ const ordersController = new OrdersController(client);
  * @see https://developer.paypal.com/docs/api/orders/v2/#orders_create
  */
 const createOrder = async (cart) => {
-  console.log(cart)
   const collect = {
     body: {
       intent: CheckoutPaymentIntent.Capture,
-       purchaseUnits: [
-      {
-        amount: {
-          currencyCode: 'USD',
-          value: '48',
-          breakdown: {
-            itemTotal: {
-              currencyCode: 'USD',
-              value: '48',
-            },
-          },
-        },
-        items: cart
-      }
-    ]
+       purchaseUnits: cart
     },
     prefer: "return=minimal",
   };
-
   try {
     const { body, ...httpResponse } = await ordersController.createOrder(
       collect
@@ -114,9 +98,10 @@ app.post("/api/orders", async (req, res) => {
   try {
     // use the cart information passed from the front-end to calculate the order amount detals
     const { cart } = req.body;
+    console.log(cart);
     const { jsonResponse, httpStatusCode } = await createOrder(cart);
     res.status(httpStatusCode).json(jsonResponse);
-    console.log(cart);
+    
   } catch (error) {
     console.error("Failed to create order:", error);
     res.status(500).json({ error: "Failed to create order." });

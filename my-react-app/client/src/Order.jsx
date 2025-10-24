@@ -51,7 +51,7 @@ var [items, setItems]=useState([]);
     setOverallTotal(overallTotal+1);
     if(items.length==0){
       setItems([
-        ...items,
+        ...items ,
         {
                 name: t.flavor,
                 unitAmount: {
@@ -59,11 +59,11 @@ var [items, setItems]=useState([]);
                   value: t.price,
                 },
                 quantity: '1',
-                
-              }
+               
+              },
       ])
       
-        setPrice(price+t.price);
+        setPrice(price+parseInt(t.price));
       console.log(items.length);
     }
     
@@ -78,11 +78,11 @@ var [items, setItems]=useState([]);
                   value: t.price,
                 },
                 quantity: '1',
-                
+               
               }
       ])
       
-        setPrice(price+t.price);
+        setPrice(price+parseInt(t.price));
       console.log(items)
     }
     else{
@@ -129,8 +129,8 @@ function decrease(){
       key={index}
         />
         )};
-        <Pay cart={ JSON.stringify([
-      {
+        <Pay cart={[
+        {
         amount: {
           currencyCode: 'USD',
           value: price.toString(),
@@ -141,9 +141,9 @@ function decrease(){
             },
           },
         },
-        items:items,
+        items: items
       }
-    ])} 
+       ]} 
         />
     </div>
   );

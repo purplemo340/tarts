@@ -16,10 +16,9 @@ function Pay(props) {
   };
 
   const [message, setMessage] = useState("");
-  console.log(props.cart[0].flavor);
+  //console.log(props.cart[0].flavor);
   return (
-    <div>
-    <h3>{props.cart[0].flavor}</h3>
+    <div> 
     <div className="paypal-button-container">
       <PayPalScriptProvider options={initialOptions}>
         <PayPalButtons
