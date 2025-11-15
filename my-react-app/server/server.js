@@ -9,7 +9,6 @@ import {
   OrdersController,
 } from "@paypal/paypal-server-sdk";
 import bodyParser from "body-parser";
-import Cart from "../client/src/Cart";
 const app = express();
 app.use(bodyParser.json());
 
@@ -124,8 +123,8 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
 
 app.post("/api/test", async (req, res) => {
   try {
-    y.push(req.body);
-    console.log(y)
+    y.push(req.body.firstName);
+    console.log(y);
     
   } catch (error) {
     console.log('error')
@@ -134,7 +133,6 @@ app.post("/api/test", async (req, res) => {
 
 app.get("/api/test1",(req, res)=>{
   console.log(req.body)
-  return(<Cart/>)
 } )
 
 app.listen(PORT, () => {

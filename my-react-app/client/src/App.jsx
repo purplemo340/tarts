@@ -15,76 +15,29 @@ import {
     useNavigate,
 } from "react-router-dom";
 
-var items;
-//items sold and pricing
-
-
-
 function App() {
- 
+// total of all items
 var [overallTotal, setOverallTotal] = useState(0);
-
-  //individual item/tart count
-
-const [count, setCount] = useState(0);
- 
-var [itemTotal, setItemTotal] = useState(0);
-//var [overallTotal, setOverallTotal] = useState(0);
-var [total, setTotal] = useState([
-  {"flavor": "Cocunut",
-    "total":0},
-  {"flavor":"Guava",
-    "total":0},
-    {"flavor":"Pineapple",
-      "total":0
-    }
-
-]);
+//price of all items
 var [price, setPrice] = useState(0);
-var [items, setItems]=useState([]);
-var [name, setName] = useState();
-  //individual item/tart count
+//array of all items
+var [items, setItems]=useState(
+  tarts.map((tart)=>(
+  {
+    name: tart.flavor,
+    unitAmount:{
+      currencyCode: 'USD',
+      value: tart.price,
+    },
+    quantity: '0',
+  }
+  ))
+);
+//increase of all items
   function increase(index, t){
 
 setOverallTotal(overallTotal+1);
-    if(items.length==0){
-      setItems([
-        ...items ,
-        {
-                name: t.flavor,
-                unitAmount: {
-                  currencyCode: 'USD',
-                  value: t.price,
-                },
-                quantity: '1',
-               
-              },
-      ])
-      
-        setPrice(price+parseInt(t.price));
-    }
-
-   
-    
-    else if (!items.some(e=>e.name===t.flavor) ){
-      console.log(typeof(t.flavor))
-      setItems([
-        ...items,
-        {
-                name: t.flavor,
-                unitAmount: {
-                  currencyCode: 'USD',
-                  value: t.price,
-                },
-                quantity: '1',
-               
-              }
-      ])
-      
-        setPrice(price+parseInt(t.price));
-      console.log(items)
-    }
-    else{
+  
       console.log("hi")
   const nextItems= items.map((item, i) =>{
     items.sort();
@@ -108,15 +61,12 @@ setOverallTotal(overallTotal+1);
     }
     
  });
-}
+
     console.log(overallTotal);
  
 }
 function decrease(index, t){
- if(overallTotal==0){
-    setOverallTotal(0)
-    setItems([])
-  } else{
+
   setOverallTotal(overallTotal-1)
   const nextItems= items.map((item, i) =>{
     items.sort();
@@ -132,7 +82,7 @@ function decrease(index, t){
     
  });
   
-  }
+  
 }
 
 
@@ -161,7 +111,7 @@ function handleSubmit(e) {
 
 
  
-
+//Home page that has the items displayed
 const Home = () => {
     
  const navigate = useNavigate();
@@ -169,14 +119,11 @@ const Home = () => {
 
     return (
       <div>
-        <form action='/api/test1/'>
-          <button type='submit'>Submit</button>
-        </form>
         <h3>{price}</h3>
         {tarts.map((tart, index) => <Item
         name= {tart.flavor}
       price={tart.price}
-      count={tart.quantity}
+      count={items[index].quantity}
       img={tart.img}
       toIncrease={()=>increase(index, tart)}
       toDecrease={() => decrease(index, tart)}
@@ -201,7 +148,9 @@ const Home = () => {
           <Route path="/test" element= {<Order
           />}></Route>
           <Route path="/cart" element={<Cart
-          cart={items}/>}> </Route>
+          cart={items}
+          price={price}
+          />}> </Route>
          {/*  <Route path="order/:id" element={<Pay />}> </Route>
           <Route path="/tart/:id" element={<More />}></Route> */}
         </Routes>

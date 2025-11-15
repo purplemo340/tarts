@@ -15,7 +15,7 @@ function Header(){
  <h1>Tarts</h1>
  <div className='menu'>
     <div className='menu-items'>
-        <button><a href='index1.html'>Home</a></button>
+        <button><a href='/'>Home</a></button>
     </div>
    
  
