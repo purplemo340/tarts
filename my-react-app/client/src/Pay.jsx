@@ -3,7 +3,12 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
 // Renders errors or successfull transactions on the screen.
 function Message({ content }) {
-  return <p>{content}</p>;
+  return (
+    <div>
+      <h3>hi</h3>
+  <p>{content}</p>
+  </div>
+  );
 }
 
 function Pay(props) {
@@ -19,6 +24,7 @@ function Pay(props) {
   //console.log(props.cart[0].flavor);
   return (
     <div> 
+      <h3>{props.name}</h3>
     <div className="paypal-button-container">
       <PayPalScriptProvider options={initialOptions}>
         <PayPalButtons
@@ -38,7 +44,8 @@ function Pay(props) {
                 // use the "body" param to optionally pass additional order information
                 // like product ids and quantities
                 body: JSON.stringify({
-                  cart: props.cart
+                  cart: props.cart,
+                  customer:props.name
                 }),
               });
 

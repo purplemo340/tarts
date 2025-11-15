@@ -103,3 +103,10 @@ img{
 .viewCartButtonContainer{
   float: right;
 }
+.items{
+  width: 100%;
+}
+.item{
+  float: left;
+  width: 33%;
+}

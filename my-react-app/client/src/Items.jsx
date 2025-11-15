@@ -1,12 +1,6 @@
-import { useState, useEffect } from 'react'
-import Cart from './Cart.jsx'
-import Tart from './Tart'
-import Pay from './Pay'
-import More from './More'
-import tarts from './tarts.js';
-import Order from './Order.jsx'
-import Item from './Item'
-import Items from './Items.jsx'
+import { useState, useEffect } from "react";
+import tarts from "./tarts";
+import Item from "./Item";
 import {
     BrowserRouter as Router,
     Routes,
@@ -14,14 +8,11 @@ import {
     Link,
     useNavigate,
 } from "react-router-dom";
-
-var items;
-//items sold and pricing
-
-
-
-function App() {
- 
+import Cart from "./Cart";
+function Items(){
+    var [items, setItems]=useState([]);
+ const navigate = useNavigate();
+    var [itemTotal, setItemTotal] = useState(0);
 var [overallTotal, setOverallTotal] = useState(0);
 
   //individual item/tart count
@@ -29,24 +20,18 @@ var [overallTotal, setOverallTotal] = useState(0);
 const [count, setCount] = useState(0);
  
 var [itemTotal, setItemTotal] = useState(0);
-//var [overallTotal, setOverallTotal] = useState(0);
-var [total, setTotal] = useState([
-  {"flavor": "Cocunut",
-    "total":0},
-  {"flavor":"Guava",
-    "total":0},
-    {"flavor":"Pineapple",
-      "total":0
-    }
-
-]);
+var [overallTotal, setOverallTotal] = useState(0);
+var [total, setTotal] = useState(0);
 var [price, setPrice] = useState(0);
 var [items, setItems]=useState([]);
 var [name, setName] = useState();
   //individual item/tart count
-  function increase(index, t){
 
-setOverallTotal(overallTotal+1);
+
+
+ function increase(index, t){
+
+    setOverallTotal(overallTotal+1);
     if(items.length==0){
       setItems([
         ...items ,
@@ -133,83 +118,54 @@ function decrease(index, t){
  });
   
   }
+
 }
-
-
- 
-function handleSubmit(e) {
-    // Prevent the browser from reloading the page
-    e.preventDefault();
-
-    // Read the form data
-    const form = e.target;
-    const formData = new FormData(form);
-    console.log(formData.entries());
-    // You can pass formData as a fetch body directly:
-    const data=fetch('/api/test1', { 
-      method: [form.method],
-      headers: {
-  'Content-Type': 'application/json'
-},
-      body: JSON.stringify(Object.fromEntries(formData)) 
-    });
-
-    // Or you can work with it as a plain object:
-    const formJson = JSON.stringify(Object.fromEntries(formData));
-    console.log(JSON.stringify('name:hi'));
-  }
-
-
- 
-
-const Home = () => {
-    
- const navigate = useNavigate();
- 
-
-    return (
-      <div>
-        <form action='/api/test1/'>
-          <button type='submit'>Submit</button>
-        </form>
-        <h3>{price}</h3>
+function testing(){
+  console.log('hi');
+  return(<Cart/>)
+}
+return(
+  
+    <div >
+      
+      <h3>{price}</h3>
         {tarts.map((tart, index) => <Item
         name= {tart.flavor}
       price={tart.price}
-      count={tart.quantity}
+      count={overallTotal}
       img={tart.img}
       toIncrease={()=>increase(index, tart)}
       toDecrease={() => decrease(index, tart)}
-      items={items}
       hostId={tart.hostId}
       key={index}
         />
         )}
         <button onClick={()=> navigate('/cart')}>Cart({overallTotal})</button>
-     </div>
-    
-    );
-};
-
-  return (
-   
-    <div className='container'>
-      <Router>
-        <Routes>
-          <Route path="/" element={<Home
-          />}></Route>
-          <Route path="/test" element= {<Order
-          />}></Route>
-          <Route path="/cart" element={<Cart
-          cart={items}/>}> </Route>
-         {/*  <Route path="order/:id" element={<Pay />}> </Route>
-          <Route path="/tart/:id" element={<More />}></Route> */}
-        </Routes>
-      </Router>
-      
+        <button onClick={()=> testing()}>Cart({overallTotal})</button>
+        <form action="/api/test1"><button type="submit" >Cart1({overallTotal})</button></form>
+        <button onClick={()=> navigate('/test')}>Test</button>
+        {/* <div hidden="hidden"> */}
+        
+        {/* </div> */}
+       {/*  <Pay cart={[
+        {
+        amount: {
+          currencyCode: 'USD',
+          value: price.toString(),
+          breakdown: {
+            itemTotal: {
+              currencyCode: 'USD',
+              value: price.toString(),
+            },
+          },
+        },
+        items: items
+      }
+       ]} 
+        /> */}
+       
     </div>
-   
-  )
+     
+)
 }
-
-export default App;
+export default Items;

@@ -17,9 +17,7 @@ function Header(){
     <div className='menu-items'>
         <button><a href='index1.html'>Home</a></button>
     </div>
-    <div className='cart'>
-        <paypal-cart-button data-id="pp-view-cart" ></paypal-cart-button>
-        </div>
+   
  
  </div>
 </div>

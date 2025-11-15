@@ -9,12 +9,14 @@ import {
   OrdersController,
 } from "@paypal/paypal-server-sdk";
 import bodyParser from "body-parser";
-
+import Cart from "../client/src/Cart";
 const app = express();
 app.use(bodyParser.json());
 
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT = 8080 } = process.env;
-
+////////////my code/////////////
+let y=[];
+///////////////////////
 const client = new Client({
   clientCredentialsAuthCredentials: {
     oAuthClientId: PAYPAL_CLIENT_ID,
@@ -96,9 +98,10 @@ const captureOrder = async (orderID) => {
 
 app.post("/api/orders", async (req, res) => {
   try {
-    // use the cart information passed from the front-end to calculate the order amount detals
-    const { cart } = req.body;
-    console.log(cart);
+    // use the cart information passed from the front-end to calculate the order amount details
+   
+    const { cart, customer } = req.body;
+    console.log(customer)
     const { jsonResponse, httpStatusCode } = await createOrder(cart);
     res.status(httpStatusCode).json(jsonResponse);
     
@@ -118,6 +121,21 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
     res.status(500).json({ error: "Failed to capture order." });
   }
 });
+
+app.post("/api/test", async (req, res) => {
+  try {
+    y.push(req.body);
+    console.log(y)
+    
+  } catch (error) {
+    console.log('error')
+  }
+});
+
+app.get("/api/test1",(req, res)=>{
+  console.log(req.body)
+  return(<Cart/>)
+} )
 
 app.listen(PORT, () => {
   console.log(`Node server listening at http://localhost:${PORT}/`);
