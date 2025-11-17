@@ -5,6 +5,10 @@ import tarts from "./tarts";
 function Cart(props){
   var [fname, setfName] = useState();
 var [lname, setlName] = useState();
+var [date, setDate] = useState();
+var [delivery, setDelivery] = useState();
+var [Instructions, setInstructions] = useState();
+var [phone, setPhone] = useState();
 const getCart = [];
 const cart= props.cart.filter(i=>i.quantity !=0)
 for(let i=0; i<cart.length; i++){
@@ -49,10 +53,29 @@ function handleSubmit(e) {
     <div>{getCart}</div>
     <p>Please enter your information below: Use the paypal buttons to pay right now. Use the submit button to get submit your order.</p>
       <form className='form' onSubmit={handleSubmit} method='POST' id='form'>
+          <div className="customerName">
           <label>First Name: </label>
-          <input className='customerName' type='text' name='firstName' value={fname} onChange={e => setfName(e.target.value)}></input>
+          <input className='customerNameInput' type='text' required name='firstName' value={fname} onChange={e => setfName(e.target.value)}></input>
           <label>Last Name: </label>
-          <input className='customerName' type='text' name='lastName' value={lname} onChange={e => setlName(e.target.value)}></input>
+          <input className='customerNameInput' type='text' required name='lastName' value={lname} onChange={e => setlName(e.target.value)}></input>
+          <label>Phone Number: </label>
+          <input className='phone' type='text' required name='phone' value={phone} onChange={e => setPhone(e.target.value)}></input>
+          </div>
+          <br/>
+          <div>
+          <label>Delivery Date: </label>
+          <input className='delivery' type='date' required name='date' value={date} onChange={e => setDate(e.target.value)}></input>
+          
+          <label>Address: </label>
+          <input className='delivery' type='text' required name='address' value={delivery} onChange={e => setDelivery(e.target.value)}></input>
+          </div>
+          <br/>
+          <div>
+          <label>Delivery Instructions: </label>
+          <br/>
+          <textarea className='delivery' type='text' required name='instructions' placeholder="Give directions to delivery address or who to leave the tarts with. " value={Instructions} onChange={e => setInstructions(e.target.value)}></textarea>
+          </div>
+          <br/>
           <button type='submit'>Submit</button>
         </form>
       <Pay

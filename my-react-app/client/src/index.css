@@ -67,7 +67,7 @@ img{
   width: 40%;
 }
 .container{
-  display: block;
+  display: grid;
 }
 .tart{
   width: 30%;
@@ -75,7 +75,10 @@ img{
   float: left;
 }
 .form{
-  display: block;
+  display: grid;
+  width: 100%;
+}
+.customerName{
   width: 100%;
 }
 .selectContainer1{
@@ -105,8 +108,26 @@ img{
 }
 .items{
   width: 100%;
+  display: block;
 }
 .item{
   float: left;
   width: 33%;
+  display: block;
+}
+.cart-button{
+  float: right;
+  display: block;
+}
+
+.price{
+  border: solid;
+  width:10%;
+}
+.right{
+  float: right;
+}
+textarea{
+  width: 50%;
+  height: 50px;
 }

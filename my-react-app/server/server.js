@@ -15,6 +15,17 @@ app.use(bodyParser.json());
 const { PAYPAL_CLIENT_ID, PAYPAL_CLIENT_SECRET, PORT = 8080 } = process.env;
 ////////////my code/////////////
 let y=[];
+import { MongoClient, ServerApiVersion  } from "mongodb";
+const mongo_pass = process.env.mongo_pass
+let url = `mongodb+srv://admin:${mongo_pass}@cluster0.l57al2s.mongodb.net/?appName=Cluster0`;
+// Create a MongoClient with a MongoClientOptions object to set the Stable API version
+const client1= new MongoClient(url, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+      }
+});
 ///////////////////////
 const client = new Client({
   clientCredentialsAuthCredentials: {
@@ -122,12 +133,22 @@ app.post("/api/orders/:orderID/capture", async (req, res) => {
 });
 
 app.post("/api/test", async (req, res) => {
+
   try {
     y.push(req.body.firstName);
-    console.log(y);
-    
+    console.log(req.body.firstName, ' ', req.body.lastName, ' ', req.body.date);
+    await client1.connect();
+    // Send a ping to confirm a successful connection
+    let myobj = { firstName: req.body.firstName, lastName: req.body.lastName, address: req.body.address };
+    await client1.db("orders").collection('tarts').insertOne(myobj);
+    console.log("Added 1 document");
+   
   } catch (error) {
     console.log('error')
+  }
+  finally {
+    // Ensures that the client will close when you finish/error
+    await client1.close();
   }
 });
 

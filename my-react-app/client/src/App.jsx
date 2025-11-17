@@ -118,8 +118,16 @@ const Home = () => {
  
 
     return (
-      <div>
-        <h3>{price}</h3>
+      <div className='container'>
+        <div>
+        <div className='cart-button'>
+        <button  onClick={()=> navigate('/cart')}>Cart({overallTotal})-${price}</button>
+        </div>
+       {/*  <div className='price right'>
+        <h3 className='center'>${price}</h3>
+        </div> */}
+        </div>
+        <div className='items'>
         {tarts.map((tart, index) => <Item
         name= {tart.flavor}
       price={tart.price}
@@ -132,7 +140,7 @@ const Home = () => {
       key={index}
         />
         )}
-        <button onClick={()=> navigate('/cart')}>Cart({overallTotal})</button>
+        </div>
      </div>
     
     );

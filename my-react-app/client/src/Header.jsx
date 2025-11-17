@@ -16,6 +16,7 @@ function Header(){
  <div className='menu'>
     <div className='menu-items'>
         <button><a href='/'>Home</a></button>
+        <button ><a href='/'>Contact Us</a></button>
     </div>
    
  
